@@ -1,0 +1,11 @@
+.row
+  .col-4
+    %h4 Pokemons
+
+
+%section.main-content
+  .row
+    .col-4
+      %h4 Add Pokemon
+
+  = render partial: 'form', locals: { form_url: pokemons_path }

@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %title= content_for(:title) || "Ravn Rails Challenge V1"
+    %meta{name: "viewport", content: "width=device-width,initial-scale=1"}
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = yield :head
+
+    %link{rel: "manifest", href: "/manifest.json"}
+    %link{rel: "icon", href: "/icon.png", type: "image/png"}
+    %link{rel: "icon", href: "/icon.svg", type: "image/svg+xml"}
+    %link{rel: "apple-touch-icon", href: "/icon.png"}
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  %body
+    .container-fluid.g-0
+  
+      %nav.navbar.bg-body-white
+        .container-fluid
+          %a.navbar-brand{href: "#"} Pokedex
+
+          .d-flex
+            = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link'
+
+      .container-fluid
+
+        .row
+          .col-2.sidebar-col
+            %ul.nav.flex-column
+              - if policy(Pokemon).index?
+                .nav-item
+                  = link_to "Pokemons", pokemons_path, class: "nav-link active"
+              
+              - if policy(User).index?
+                .nav-item
+                  = link_to "Trainers", trainers_path, class: "nav-link"
+
+              - if policy(UserPokemon).index?
+                .nav-item
+                  = link_to "Catched Pokemons", catched_pokemons_path, class: "nav-link"
+
+          .col-10.content-col
+            = yield

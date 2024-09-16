@@ -1,0 +1,11 @@
+.row
+  .col-4
+    %h4 Trainers
+
+%section.main-content
+  .row
+    .col-4
+      %h4 Add Trainer
+
+  = render partial: 'form', locals: { form_url: trainers_path }
+  

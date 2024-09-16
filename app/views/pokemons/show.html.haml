@@ -1,0 +1,27 @@
+.card
+  .card-body
+    - if @pokemon.image.attached?
+      = image_tag @pokemon.image, class: 'img-thumbnail'
+      %br
+
+    %p
+      %strong Name
+      = @pokemon.name
+
+
+    %p
+      %strong Type
+      %span.badge{style: "background-color: #{@pokemon.pokemon_type.color_hex}"}
+        = @pokemon.pokemon_type.name
+
+    %p
+      %strong Main Technique
+      = @pokemon.main_technique
+
+    %p
+      %strong Description
+      = @pokemon.description
+
+    %p
+      %strong Countries
+      = @pokemon.countries.map(&:name).join(', ')

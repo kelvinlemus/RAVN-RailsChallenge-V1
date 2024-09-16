@@ -1,0 +1,14 @@
+.row
+  .col-4
+    %h4 Catched Pokemons
+
+
+%section.main-content
+  .row
+    .col-4
+      %h4 Catch Pokemon
+
+  = simple_form_for @user_pokemon, url: catched_pokemons_path do |f|
+    = f.input :pokemon_id, collection: pokemons
+    = f.input :nickname
+    = f.button :submit, 'Catch Pokemon', class: 'btn-action'

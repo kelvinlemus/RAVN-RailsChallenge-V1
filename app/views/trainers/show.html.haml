@@ -1,0 +1,25 @@
+.card
+  .card-body
+    - if @trainer.avatar.attached?
+      = image_tag @trainer.avatar, class: 'img-thumbnail'
+      %br
+
+    %p
+      %strong First Name
+      = @trainer.first_name
+
+    %p
+      %strong Last Name
+      = @trainer.last_name  
+
+    %p
+      %strong Email
+      = @trainer.email
+
+    %p
+      %strong Country
+      = @trainer.country&.name
+
+    %p
+      %strong Pokemons
+      = @trainer.pokemons.map(&:name).join(', ')

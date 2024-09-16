@@ -1,0 +1,11 @@
+= simple_form_for @pokemon, url: form_url do |f|
+  = f.input :name
+  = f.input :image, as: :file, input_html: { direct_upload: true }
+  - if @pokemon.image.attached?
+    = image_tag @pokemon.image, class: 'img-thumbnail'
+
+  = f.input :main_technique
+  = f.input :description, as: :text
+  = f.input :pokemon_type_id, collection: pokemon_types
+  = f.input :country_ids, multiple: true, collection: countries, selected: @pokemon.countries.ids
+  = f.button :submit, class: 'btn-action'

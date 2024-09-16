@@ -1,0 +1,30 @@
+.row.mb-2
+  .col-8
+    %h4 Catched Pokemons
+
+%section.main-content
+  .row
+    .col-4
+      %h4 Catched Pokemons
+    .col-8
+      = link_to 'Catch Pokemon', new_catched_pokemon_path, class: 'float-end btn-action'
+
+  %table.table
+    %thead
+      %tr
+        %th Date
+        %th Name
+        %th Type
+    %tbody
+      - @user_pokemons.each do |user_pokemon|
+        %tr
+          %td
+            = user_pokemon.created_at_format
+          %td
+            = user_pokemon.pokemon_with_nickname
+          %td
+            %span.badge{style: "background-color: #{user_pokemon.pokemon.pokemon_type.color_hex}"}
+              = user_pokemon.pokemon.pokemon_type.name
+    %br
+
+  = paginate @user_pokemons, theme: 'bootstrap-5'

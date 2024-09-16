@@ -1,0 +1,39 @@
+.row.mb-2
+  .col-8
+    %h4 Pokemons
+  .col-4
+    %form{action: pokemons_path}
+      %input.form-control.float-end{name: 'search', placeholder: 'Search...', value: params[:search]}
+
+%section.main-content
+  .row
+    .col-4
+      %h4 Pokemons
+    .col-8
+      - if policy(Pokemon).create?
+        = link_to 'New Pokemon', new_pokemon_path, class: 'float-end btn-action'
+
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Type
+        %th
+        %th
+    %tbody
+      - @pokemons.each do |pokemon|
+        %tr
+          %td
+            = link_to pokemon.name, pokemon_path(pokemon)
+          %td
+            %span.badge{style: "background-color: #{pokemon.pokemon_type.color_hex}"}
+              = pokemon.pokemon_type.name
+          %td
+            - if policy(pokemon).edit?
+              = link_to 'Edit', edit_pokemon_path(pokemon)
+          %td
+            - if policy(pokemon).destroy?
+              = link_to 'Destroy', pokemon, method: :delete, data: { confirm: 'Are you sure?' }
+    %br
+
+  = paginate @pokemons, theme: 'bootstrap-5'

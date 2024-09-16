@@ -1,0 +1,35 @@
+.row.mb-2
+  .col-8
+    %h4 Trainers
+  .col-4
+    %form{action: trainers_path}
+      %input.form-control.float-end{name: 'search', placeholder: 'Search...', value: params[:search]}
+
+%section.main-content
+  .row
+    .col-4
+      %h4 Trainers
+    .col-8
+      = link_to 'New Trainer', new_trainer_path, class: 'float-end btn-action'
+
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th
+        %th
+    %tbody
+      - @trainers.each do |trainer|
+        %tr
+          %td
+            = link_to trainer.full_name, trainer_path(trainer)
+          %td= trainer.email
+          %td
+            - if policy(trainer).edit?
+              = link_to 'Edit', edit_trainer_path(trainer)
+          %td
+            - if policy(trainer).destroy?
+              = link_to 'Destroy', trainer_path(trainer), method: :delete, data: { confirm: 'Are you sure?' }
+
+  = paginate @trainers, theme: 'bootstrap-5'
