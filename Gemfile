@@ -32,7 +32,7 @@ gem "simple_form", "5.3.1"
 gem "kaminari"
 gem "bootstrap5-kaminari-views"
 
-gem "rubocop-rails", "2.26.1", require: false
+gem "rubocop-rails", "2.26.2", require: false
 gem 'whenever', require: false
 
 gem "image_processing", ">= 1.2"
